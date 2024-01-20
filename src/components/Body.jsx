@@ -7,6 +7,7 @@ import FoodCategories from "./FoodCategories.jsx";
 import { foodCategories } from "../data/FoodCategories.js";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { FaCircleArrowLeft } from "react-icons/fa6";
+import RecomendedResturant from "./RecomendedResturant.jsx";
 
 export default function Body({ datas }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,8 +17,8 @@ export default function Body({ datas }) {
   };
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center mt-10 lg:px-32 px-4 text-[#111111]">
-      <div className="flex flex-col justify-center items-center gap-3 my-20 ">
+    <div className="flex flex-col gap-4 justify-center items-center mt-10 lg:px-32 px-4 text-[#111111] z-[99999]">
+      <div className="flex flex-col justify-center items-center gap-3 pt-20 pb-10 border-b">
         <div className="flex justify-between items-center w-full px-16">
           <p className="text-2xl font-semibold text-[#111111]">
             Anup, what's on your mind?
@@ -51,13 +52,12 @@ export default function Body({ datas }) {
             dynamicHeight={false}
             renderThumbs={() => {}}
             centerMode={true}
-            centerSlidePercentage={100 / 6}
+            centerSlidePercentage={100 / 8}
             showStatus={false}
             showIndicators={false}
           >
             {foodCategories.map((category, index) => (
               <FoodCategories
-            
                 key={index}
                 category={category}
                 currentIndex={currentIndex}
@@ -66,6 +66,12 @@ export default function Body({ datas }) {
             ))}
           </Carousel>
         </div>
+      </div>
+      <div className="px-16 flex flex-col justify-start gap-4 mt-10">
+        <h2 className="text-2xl font-semibold text-[#111111]">
+          Top restaurant chains in Bangalore
+        </h2>
+        <RecomendedResturant />
       </div>
 
       <div className="flex gap-4 justify-center items-center flex-wrap">
