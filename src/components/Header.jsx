@@ -84,7 +84,7 @@ export default function Header() {
       </div>
       {/* ------------------------Menu icon nav--------------------------------------------------------- */}
       {menuOpen && (
-        <ul className="text-4xl flex flex-col pt-[10%] top-0 justify-start items-center gap-10 absolute bg-white w-full h-[100vh] z-999999">
+        <ul className="text-4xl flex flex-col pt-[10%] left-0 top-0 justify-start items-center gap-10 absolute bg-white w-full h-[100vh] z-999999">
           <li onClick={handleMenuClose}>
             <span className="text-3xl">
               <MdOutlineClose />

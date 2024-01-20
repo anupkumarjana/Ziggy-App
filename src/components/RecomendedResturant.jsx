@@ -4,29 +4,19 @@ import { BsDot } from "react-icons/bs";
 import star from "../assets/homepage/star.svg";
 
 export default function RecomendedResturant() {
-  // recResturant,
-  // info,
-  // id,
-  // name,
-  // cloudinaryImageId,
-  // cuisines,
-  // avgRating,
-  // deliveryTime,
-  // header,
-  // subHeader,
   return (
-    <div className="flex justify-start gap-10 items-center flex-wrap">
+    <div className="flex justify-center gap-10 items-center flex-wrap">
       {resturantsFavData.map((resturant) => {
         return (
           <div
-            className="flex flex-col justify-start items-center flex-wrap w-72 hover:scale-95 transition duration-500 cursor-pointer"
+            className="flex flex-col justify-start items-center flex-wrap w-56 hover:scale-95 transition duration-500 cursor-pointer"
             key={resturant.info.id}
           >
             <div className="relative w-full">
               <img
                 src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${resturant.info.cloudinaryImageId}`}
                 alt="category-img"
-                className="w-full h-48 object-cover relative rounded-lg"
+                className="w-full h-40 object-cover relative rounded-lg"
               />
               <div class="absolute inset-x-0 bottom-0 h-20 ">
                 <div class="h-full bg-gradient-to-t from-black to-transparent rounded-b-lg"></div>

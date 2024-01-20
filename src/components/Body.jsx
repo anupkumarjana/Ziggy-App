@@ -8,6 +8,7 @@ import { foodCategories } from "../data/FoodCategories.js";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import RecomendedResturant from "./RecomendedResturant.jsx";
+import AllResturants from "./AllResturants.jsx";
 
 export default function Body({ datas }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -72,6 +73,12 @@ export default function Body({ datas }) {
           Top restaurant chains in Bangalore
         </h2>
         <RecomendedResturant />
+      </div>
+      <div className="px-16 flex flex-col justify-start gap-4 mt-10">
+        <h2 className="text-2xl font-semibold text-[#111111]">
+          Restaurants with online food delivery in Bangalore
+        </h2>
+        <AllResturants />
       </div>
 
       <div className="flex gap-4 justify-center items-center flex-wrap">
