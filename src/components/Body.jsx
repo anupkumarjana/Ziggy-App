@@ -1,6 +1,6 @@
 // Body.jsx
 import React, { useState } from "react";
-import Card from "./Card.jsx";
+// import Card from "./Card.jsx";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import FoodCategories from "./FoodCategories.jsx";
@@ -9,6 +9,8 @@ import { FaCircleArrowRight } from "react-icons/fa6";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import RecomendedResturant from "./RecomendedResturant.jsx";
 import AllResturants from "./AllResturants.jsx";
+import { resturantsFavData } from "../data/ResturantFavData.js";
+import { allRestaurants } from "../data/AllResturants.js";
 
 export default function Body({ datas }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -72,20 +74,36 @@ export default function Body({ datas }) {
         <h2 className="text-2xl font-semibold text-[#111111]">
           Top restaurant chains in Bangalore
         </h2>
-        <RecomendedResturant />
+        <div className="flex justify-center gap-10 items-center flex-wrap">
+          {resturantsFavData.map((resturant) => {
+            return (
+              <RecomendedResturant
+                resturant={resturant}
+                key={resturant.info.id}
+              />
+            );
+          })}
+        </div>
       </div>
       <div className="px-16 flex flex-col justify-start gap-4 mt-10">
         <h2 className="text-2xl font-semibold text-[#111111]">
           Restaurants with online food delivery in Bangalore
         </h2>
-        <AllResturants />
+
+        <div className="flex justify-start gap-10 items-center flex-wrap">
+          {allRestaurants.map((resturant) => {
+            return (
+              <AllResturants resturant={resturant} key={resturant.info.id} />
+            );
+          })}
+        </div>
       </div>
 
-      <div className="flex gap-4 justify-center items-center flex-wrap">
+      {/* <div className="flex gap-4 justify-center items-center flex-wrap">
         {datas.map((product) => (
           <Card key={product.data.id} {...product.data} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
