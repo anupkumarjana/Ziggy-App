@@ -15,8 +15,8 @@ import { allRestaurants } from "../data/AllResturants.js";
 export default function Body({ datas }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleChange = (index) => {
-    setCurrentIndex(index);
+  const handleChange = (id) => {
+    setCurrentIndex(id);
   };
 
   return (
@@ -59,9 +59,9 @@ export default function Body({ datas }) {
             showStatus={false}
             showIndicators={false}
           >
-            {foodCategories.map((category, index) => (
+            {foodCategories.map((category,id) => (
               <FoodCategories
-                key={index}
+                key={id}
                 category={category}
                 currentIndex={currentIndex}
                 handleChange={handleChange}
