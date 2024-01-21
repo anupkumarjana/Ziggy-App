@@ -1,6 +1,5 @@
-// Body.jsx
 import React, { useState } from "react";
-// import Card from "./Card.jsx";
+import Card from "./Card.jsx";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import FoodCategories from "./FoodCategories.jsx";
@@ -15,9 +14,20 @@ import { allRestaurants } from "../data/AllResturants.js";
 export default function Body({ datas }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [topResturants, setTopResturants] = useState(allRestaurants);
+
+
   const handleChange = (id) => {
     setCurrentIndex(id);
   };
+  function handleTopResturants() {
+    const filteredTopResturants = topResturants.filter(
+      (resturant) => resturant.info.avgRating >= 4.0
+    );
+    console.log(filteredTopResturants);
+    setTopResturants(filteredTopResturants);
+  }
+  
 
   return (
     <div className="flex flex-col gap-4 justify-center items-center mt-10 lg:px-32 px-4 text-[#111111] z-[99999]">
@@ -59,7 +69,7 @@ export default function Body({ datas }) {
             showStatus={false}
             showIndicators={false}
           >
-            {foodCategories.map((category,id) => (
+            {foodCategories.map((category, id) => (
               <FoodCategories
                 key={id}
                 category={category}
@@ -89,9 +99,32 @@ export default function Body({ datas }) {
         <h2 className="text-2xl font-semibold text-[#111111]">
           Restaurants with online food delivery in Bangalore
         </h2>
+        <div className="my-2 py-4 px-4 w-full flex justify-between">
+          <button className="border rounded-2xl px-4 py-2 shadow-sm">
+            Sort By
+          </button>
+          <button className="border rounded-2xl px-4 py-2 shadow-sm">
+            Fast Delivery
+          </button>
+          <button
+            className="border rounded-2xl px-4 py-2 shadow-sm"
+            onClick={handleTopResturants}
+          >
+            Ratings 4.0+
+          </button>
+          <button className="border rounded-2xl px-4 py-2 shadow-sm">
+            Pure Veg
+          </button>
+          <button className="border rounded-2xl px-4 py-2 shadow-sm">
+            Rs. 300-Rs. 600
+          </button>
+          <button className="border rounded-2xl px-4 py-2 shadow-sm">
+            Less Than Rs. 300
+          </button>
+        </div>
 
         <div className="flex justify-start gap-10 items-center flex-wrap">
-          {allRestaurants.map((resturant) => {
+          {topResturants.map((resturant) => {
             return (
               <AllResturants resturant={resturant} key={resturant.info.id} />
             );
@@ -99,11 +132,11 @@ export default function Body({ datas }) {
         </div>
       </div>
 
-      {/* <div className="flex gap-4 justify-center items-center flex-wrap">
+      <div className="flex gap-4 justify-center items-center flex-wrap">
         {datas.map((product) => (
           <Card key={product.data.id} {...product.data} />
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }

@@ -12,8 +12,8 @@ export default function RecomendedResturant({ resturant }) {
           alt="category-img"
           className="w-full h-40 object-cover relative rounded-lg"
         />
-        <div class="absolute inset-x-0 bottom-0 h-20 ">
-          <div class="h-full bg-gradient-to-t from-black to-transparent rounded-b-lg"></div>
+        <div className="absolute inset-x-0 bottom-0 h-20 ">
+          <div className="h-full bg-gradient-to-t from-black to-transparent rounded-b-lg"></div>
         </div>
         <span className="absolute left-2 bottom-2 text-xl font-extrabold text-white shadow-lg b">
           {resturant.info.aggregatedDiscountInfoV3
