@@ -17,23 +17,60 @@ export default function Body({ datas }) {
   const [topResturants, setTopResturants] = useState(allRestaurants);
   const [isFilterted, setisFilterted] = useState(false);
 
+  const [topDeliveryTime, setTopDeliveryTime] = useState(allRestaurants);
+  const [isFilterted1, setisFilterted1] = useState(false);
+
+  const [isPureVeg, setIsPureVeg] = useState(allRestaurants);
+  const [isFilterted2, setisFilterted2] = useState(false);
+
   const handleChange = (id) => {
     setCurrentIndex(id);
   };
-  function handleTopResturants() {
-   
-     const filteredTopResturants = topResturants.filter(
-       (resturant) => resturant.info.avgRating >= 4.0
-     );
-     console.log(filteredTopResturants);
-     handleToggleFilter();
-     isFilterted
-       ? setTopResturants(allRestaurants)
-       : setTopResturants(filteredTopResturants);
-  
-  }
   function handleToggleFilter() {
     setisFilterted(!isFilterted);
+  }
+  function handleTopResturants() {
+    const filteredTopResturants = topResturants.filter(
+      (resturant) => resturant.info.avgRating >= 4.0
+    );
+    console.log(filteredTopResturants);
+    handleToggleFilter();
+    isFilterted
+      ? setTopResturants(allRestaurants)
+      : setTopResturants(filteredTopResturants);
+  }
+
+  function handleToggleFilter1() {
+    setisFilterted1(!isFilterted1);
+  }
+  function handleTopDeliveryTime() {
+    handleToggleFilter1();
+
+    if (isFilterted1) {
+      // If filtered, set the sorted order
+      const sortedRestaurants = [...topDeliveryTime].sort(
+        (a, b) => a.info.sla.deliveryTime - b.info.sla.deliveryTime
+      );
+      setTopDeliveryTime(sortedRestaurants);
+    } else {
+      // If not filtered, reset to the original order
+      setTopDeliveryTime(allRestaurants);
+    }
+  }
+
+  function handleToggleFilter2() {
+    setisFilterted2(!isFilterted2);
+  }
+
+  function handlePureVeg() {
+    const filteredPureVegRestaurants = isPureVeg.filter((resturant) => {
+      return resturant.info.veg !== undefined;
+    });
+    console.log(filteredPureVegRestaurants);
+    handleToggleFilter2();
+    isFilterted2
+      ? setIsPureVeg(allRestaurants)
+      : setIsPureVeg(filteredPureVegRestaurants);
   }
 
   return (
@@ -110,7 +147,12 @@ export default function Body({ datas }) {
           <button className="border rounded-2xl px-4 py-2 shadow-sm">
             Sort By
           </button>
-          <button className="border rounded-2xl px-4 py-2 shadow-sm">
+          <button
+            className={`border rounded-2xl px-4 py-2 shadow-sm ${
+              isFilterted1 ? "bg-blue-500 text-white" : ""
+            }`}
+            onClick={handleTopDeliveryTime}
+          >
             Fast Delivery
           </button>
           <button
@@ -121,7 +163,12 @@ export default function Body({ datas }) {
           >
             Ratings 4.0+
           </button>
-          <button className="border rounded-2xl px-4 py-2 shadow-sm">
+          <button
+            className={`border rounded-2xl px-4 py-2 shadow-sm ${
+              isFilterted2 ? "bg-blue-500 text-white" : ""
+            }`}
+            onClick={handlePureVeg}
+          >
             Pure Veg
           </button>
           <button className="border rounded-2xl px-4 py-2 shadow-sm">
