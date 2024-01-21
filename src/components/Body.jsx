@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Card from "./Card.jsx";
+// import Card from "./Card.jsx";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import FoodCategories from "./FoodCategories.jsx";
@@ -15,19 +15,26 @@ export default function Body({ datas }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const [topResturants, setTopResturants] = useState(allRestaurants);
-
+  const [isFilterted, setisFilterted] = useState(false);
 
   const handleChange = (id) => {
     setCurrentIndex(id);
   };
   function handleTopResturants() {
-    const filteredTopResturants = topResturants.filter(
-      (resturant) => resturant.info.avgRating >= 4.0
-    );
-    console.log(filteredTopResturants);
-    setTopResturants(filteredTopResturants);
-  }
+   
+     const filteredTopResturants = topResturants.filter(
+       (resturant) => resturant.info.avgRating >= 4.0
+     );
+     console.log(filteredTopResturants);
+     handleToggleFilter();
+     isFilterted
+       ? setTopResturants(allRestaurants)
+       : setTopResturants(filteredTopResturants);
   
+  }
+  function handleToggleFilter() {
+    setisFilterted(!isFilterted);
+  }
 
   return (
     <div className="flex flex-col gap-4 justify-center items-center mt-10 lg:px-32 px-4 text-[#111111] z-[99999]">
@@ -107,7 +114,9 @@ export default function Body({ datas }) {
             Fast Delivery
           </button>
           <button
-            className="border rounded-2xl px-4 py-2 shadow-sm"
+            className={`border rounded-2xl px-4 py-2 shadow-sm ${
+              isFilterted ? "bg-blue-500 text-white" : ""
+            }`}
             onClick={handleTopResturants}
           >
             Ratings 4.0+
@@ -123,7 +132,7 @@ export default function Body({ datas }) {
           </button>
         </div>
 
-        <div className="flex justify-start gap-10 items-center flex-wrap">
+        <div className="flex justify-center  gap-10 items-center flex-wrap">
           {topResturants.map((resturant) => {
             return (
               <AllResturants resturant={resturant} key={resturant.info.id} />
@@ -132,11 +141,11 @@ export default function Body({ datas }) {
         </div>
       </div>
 
-      <div className="flex gap-4 justify-center items-center flex-wrap">
+      {/* <div className="flex gap-4 justify-center items-center flex-wrap">
         {datas.map((product) => (
           <Card key={product.data.id} {...product.data} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
