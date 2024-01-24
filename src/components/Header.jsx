@@ -23,7 +23,10 @@ export default function Header() {
   return (
     <header className="fixed top-0 z-[999999] flex justify-between items-center px-10 lg:px-32 py-8 lg:py-6 font-satoshi border-b w-full shadow-lg bg-white">
       <div className="flex gap-4 items-center">
-        <img src={logo} alt="logo" className="lg:w-8 w-12" />
+        <Link to="/">
+          <img src={logo} alt="logo" className="lg:w-8 w-12" />
+        </Link>
+
         <div className="lg:flex gap-2 items-center hidden">
           <span className="text-sm">
             <FaLocationDot />
@@ -37,7 +40,10 @@ export default function Header() {
       <nav className="lg:block hidden">
         <ul className="flex justify-between gap-10">
           <li>
-            <Link to="/search" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+            <Link
+              to="/search"
+              className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer"
+            >
               <span className="text-xl">
                 <IoSearch />
               </span>
@@ -45,7 +51,10 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/offers" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+            <Link
+              to="/offers"
+              className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer"
+            >
               <span className="text-xl">
                 <BiSolidOffer />
               </span>
@@ -53,7 +62,10 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/help" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+            <Link
+              to="/help"
+              className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer"
+            >
               <span className="text-xl">
                 <IoHelpBuoyOutline />
               </span>
@@ -61,7 +73,10 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/profile" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+            <Link
+              to="/profile"
+              className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer"
+            >
               <span className="text-xl">
                 <RiAccountCircleLine />
               </span>
@@ -69,7 +84,10 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/cart" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+            <Link
+              to="/cart"
+              className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer"
+            >
               <span className="text-xl">
                 <FaShoppingCart />
               </span>
