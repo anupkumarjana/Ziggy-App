@@ -98,15 +98,26 @@ export default function Header() {
       </nav>
       {/* ----------------------------------Smaller screen navbar------------------------------------- */}
       <div className="lg:hidden flex gap-8 items-center">
-        <span className="text-3xl font-bold">
-          <IoSearch />
-        </span>
-        <span className="text-3xl">
-          <FaShoppingCart />
-        </span>
-        <span className="text-3xl">
-          <RiAccountCircleLine />
-        </span>
+        <Link to="/search">
+          <span className="text-3xl font-bold">
+            <IoSearch />
+          </span>
+        </Link>
+
+        <Link to="/cart">
+          {" "}
+          <span className="text-3xl">
+            <FaShoppingCart />
+          </span>
+        </Link>
+
+        <Link to="/profile">
+          {" "}
+          <span className="text-3xl">
+            <RiAccountCircleLine />
+          </span>
+        </Link>
+
         <span onClick={handleMenuClick} className="text-3xl">
           <CiMenuBurger />
         </span>
