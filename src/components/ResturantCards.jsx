@@ -3,7 +3,7 @@ import React from "react";
 import { BsDot } from "react-icons/bs";
 import star from "../assets/homepage/star.svg";
 
-export default function AllResturants({ resturant }) {
+export default function ResturentCard({ resturant }) {
   return (
     <>
       <div

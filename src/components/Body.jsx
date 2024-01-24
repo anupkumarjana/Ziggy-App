@@ -1,31 +1,60 @@
-import React, { useState } from "react";
-// import Card from "./Card.jsx";
+import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
-import FoodCategories from "./FoodCategories.jsx";
-import { foodCategories } from "../data/FoodCategories.js";
-import { FaCircleArrowRight } from "react-icons/fa6";
-import { FaCircleArrowLeft } from "react-icons/fa6";
 import RecomendedResturant from "./RecomendedResturant.jsx";
-import AllResturants from "./AllResturants.jsx";
-import { resturantsFavData } from "../data/ResturantFavData.js";
+import ResturentCard from "./ResturantCards.jsx";
 import { allRestaurants } from "../data/AllResturants.js";
+import FoodCategoryCrousel from "./FoodCategoryCrousel.jsx";
+import Shimmer from "./Shimmer.jsx";
 
-export default function Body({ datas }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function Body() {
+  const [listOfResturants, setListOfResturants] = useState([]);
 
-  const [topResturants, setTopResturants] = useState(allRestaurants);
+  const [topResturants, setTopResturants] = useState(listOfResturants);
   const [isFilterted, setisFilterted] = useState(false);
 
-  const [topDeliveryTime, setTopDeliveryTime] = useState(allRestaurants);
-  const [isFilterted1, setisFilterted1] = useState(false);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const [isPureVeg, setIsPureVeg] = useState(allRestaurants);
-  const [isFilterted2, setisFilterted2] = useState(false);
-
-  const handleChange = (id) => {
-    setCurrentIndex(id);
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const jsonData = await data.json();
+    console.log(jsonData);
+    setListOfResturants(
+      jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
   };
+  if (listOfResturants.length === 0) {
+    return (
+      <div className=" flex justify-center gap-10 items-center flex-wrap mt-40 lg:px-32 px-4">
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+      </div>
+    );
+  }
+
   function handleToggleFilter() {
     setisFilterted(!isFilterted);
   }
@@ -40,96 +69,15 @@ export default function Body({ datas }) {
       : setTopResturants(filteredTopResturants);
   }
 
-  function handleToggleFilter1() {
-    setisFilterted1(!isFilterted1);
-  }
-  function handleTopDeliveryTime() {
-    handleToggleFilter1();
-
-    if (isFilterted1) {
-      // If filtered, set the sorted order
-      const sortedRestaurants = [...topDeliveryTime].sort(
-        (a, b) => a.info.sla.deliveryTime - b.info.sla.deliveryTime
-      );
-      setTopDeliveryTime(sortedRestaurants);
-    } else {
-      // If not filtered, reset to the original order
-      setTopDeliveryTime(allRestaurants);
-    }
-  }
-
-  function handleToggleFilter2() {
-    setisFilterted2(!isFilterted2);
-  }
-
-  function handlePureVeg() {
-    const filteredPureVegRestaurants = isPureVeg.filter((resturant) => {
-      return resturant.info.veg !== undefined;
-    });
-    console.log(filteredPureVegRestaurants);
-    handleToggleFilter2();
-    isFilterted2
-      ? setIsPureVeg(allRestaurants)
-      : setIsPureVeg(filteredPureVegRestaurants);
-  }
-
   return (
     <div className="flex flex-col gap-4 justify-center items-center mt-10 lg:px-32 px-4 text-[#111111] z-[99999]">
-      <div className="flex flex-col justify-center items-center gap-3 pt-20 pb-10 border-b">
-        <div className="flex justify-between items-center w-full px-16">
-          <p className="text-2xl font-semibold text-[#111111]">
-            Anup, what's on your mind?
-          </p>
-          <div className="carousel-buttons flex gap-4 items-center">
-            <button
-              className="text-slate-300 text-3xl"
-              onClick={() => handleChange(currentIndex - 1)}
-            >
-              <FaCircleArrowLeft />
-            </button>
-            <button
-              className="text-slate-300 text-3xl"
-              onClick={() => handleChange(currentIndex + 1)}
-            >
-              <FaCircleArrowRight />
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <Carousel
-            showArrows={false}
-            autoPlay={false}
-            infiniteLoop={false}
-            selectedItem={currentIndex}
-            onChange={handleChange}
-            className="carousel-container px-16"
-            showThumbs={false}
-            emulateTouch={true}
-            dynamicHeight={false}
-            renderThumbs={() => {}}
-            centerMode={true}
-            centerSlidePercentage={100 / 8}
-            showStatus={false}
-            showIndicators={false}
-          >
-            {foodCategories.map((category, id) => (
-              <FoodCategories
-                key={id}
-                category={category}
-                currentIndex={currentIndex}
-                handleChange={handleChange}
-              />
-            ))}
-          </Carousel>
-        </div>
-      </div>
+      <FoodCategoryCrousel />
       <div className="px-16 flex flex-col justify-start gap-4 mt-10">
         <h2 className="text-2xl font-semibold text-[#111111]">
           Top restaurant chains in Bangalore
         </h2>
         <div className="flex justify-center gap-10 items-center flex-wrap">
-          {resturantsFavData.map((resturant) => {
+          {listOfResturants.map((resturant) => {
             return (
               <RecomendedResturant
                 resturant={resturant}
@@ -148,10 +96,9 @@ export default function Body({ datas }) {
             Sort By
           </button>
           <button
-            className={`border rounded-2xl px-4 py-2 shadow-sm ${
-              isFilterted1 ? "bg-blue-500 text-white" : ""
-            }`}
-            onClick={handleTopDeliveryTime}
+            className="border rounded-2xl px-4 py-2 shadow-sm"
+
+            // onClick={handleTopDeliveryTime}
           >
             Fast Delivery
           </button>
@@ -164,10 +111,8 @@ export default function Body({ datas }) {
             Ratings 4.0+
           </button>
           <button
-            className={`border rounded-2xl px-4 py-2 shadow-sm ${
-              isFilterted2 ? "bg-blue-500 text-white" : ""
-            }`}
-            onClick={handlePureVeg}
+            className="border rounded-2xl px-4 py-2 shadow-sm"
+            // onClick={handlePureVeg}
           >
             Pure Veg
           </button>
@@ -180,11 +125,10 @@ export default function Body({ datas }) {
         </div>
 
         <div className="flex justify-center  gap-10 items-center flex-wrap">
-          {topResturants.map((resturant) => {
-            return (
-              <AllResturants resturant={resturant} key={resturant.info.id} />
-            );
-          })}
+          {listOfResturants &&
+            listOfResturants.map((resturant, index) => {
+              return <ResturentCard resturant={resturant} key={index} />;
+            })}
         </div>
       </div>
 

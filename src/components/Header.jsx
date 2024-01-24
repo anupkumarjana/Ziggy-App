@@ -8,6 +8,7 @@ import { IoHelpBuoyOutline } from "react-icons/io5";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { MdOutlineClose } from "react-icons/md";
 import { CiMenuBurger } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,35 +36,45 @@ export default function Header() {
 
       <nav className="lg:block hidden">
         <ul className="flex justify-between gap-10">
-          <li className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
-            <span className="text-xl">
-              <IoSearch />
-            </span>
-            <a href="/search">Search</a>
+          <li>
+            <Link to="/search" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+              <span className="text-xl">
+                <IoSearch />
+              </span>
+              <span>Search</span>
+            </Link>
           </li>
-          <li className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
-            <span className="text-xl">
-              <BiSolidOffer />
-            </span>
-            <a href="/offers">Offers</a>
+          <li>
+            <Link to="/offers" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+              <span className="text-xl">
+                <BiSolidOffer />
+              </span>
+              <span>Offers</span>
+            </Link>
           </li>
-          <li className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
-            <span className="text-xl">
-              <IoHelpBuoyOutline />
-            </span>
-            <a href="/help">Help</a>
+          <li>
+            <Link to="/help" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+              <span className="text-xl">
+                <IoHelpBuoyOutline />
+              </span>
+              <span>Help</span>
+            </Link>
           </li>
-          <li className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
-            <span className="text-xl">
-              <RiAccountCircleLine />
-            </span>
-            <a href="/profile">Profile</a>
+          <li>
+            <Link to="/profile" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+              <span className="text-xl">
+                <RiAccountCircleLine />
+              </span>
+              <span>Profile</span>
+            </Link>
           </li>
-          <li className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
-            <span className="text-xl">
-              <FaShoppingCart />
-            </span>
-            <a href="/cart">Cart</a>
+          <li>
+            <Link to="/cart" className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
+              <span className="text-xl">
+                <FaShoppingCart />
+              </span>
+              <span>Cart</span>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -91,7 +102,7 @@ export default function Header() {
             </span>
           </li>
           <li className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer">
-            <span >
+            <span>
               <BiSolidOffer />
             </span>
             <a href="/offers">Offers</a>
