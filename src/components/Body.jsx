@@ -5,6 +5,7 @@ import ResturentCard from "./ResturantCards.jsx";
 import { allRestaurants } from "../data/AllResturants.js";
 import FoodCategoryCrousel from "./FoodCategoryCrousel.jsx";
 import Shimmer from "./Shimmer.jsx";
+import Footer from "./Footer.jsx";
 
 export default function Body() {
   const [listOfResturants, setListOfResturants] = useState([]);
@@ -46,12 +47,11 @@ export default function Body() {
   return (
     <>
       <FoodCategoryCrousel />
-      <div className="flex flex-col gap-4 justify-center items-center lg:px-32 px-4 text-[#111111] z-[99999]">
-        <div className="px-16 flex flex-col justify-start gap-4 mt-10">
+      <div className="flex flex-col gap-4 justify-center items-center lg:px-32 px-4 text-[#111111] z-[99999] ">
+        {/* <div className="px-16 flex flex-col justify-start gap-4 mt-10">
           <h2 className="text-2xl font-semibold text-[#111111]">
             Top restaurant chains in Bangalore
           </h2>
-          {/* <div className="flex justify-center gap-10 items-center flex-wrap"> */}
             {listOfResturants.length === 0 ? (
               <div className=" flex justify-center gap-10 items-center flex-wrap mt-10 ">
                 <Shimmer />
@@ -69,13 +69,13 @@ export default function Body() {
                 ))}
               </div>
             )}
-          {/* </div> */}
-        </div>
-        <div className="px-16 flex flex-col justify-start gap-4 mt-10">
+       
+        </div> */}
+        <div className="px-16 flex flex-col justify-start gap-2 mt-4">
           <h2 className="text-2xl font-semibold text-[#111111]">
             Restaurants with online food delivery in Bangalore
           </h2>
-          <div className="my-2 py-4 px-4 w-full flex justify-between">
+          <div className=" py-2 px-4 w-full flex justify-between">
             <button className="border rounded-2xl px-4 py-2 shadow-sm">
               Sort By
             </button>
@@ -108,7 +108,7 @@ export default function Body() {
             </button>
           </div>
           {listOfResturants.length === 0 ? (
-            <div className=" flex justify-center gap-10 items-center flex-wrap mt-40 lg:px-32 px-4">
+            <div className=" flex justify-center gap-10 items-center flex-wrap">
               <Shimmer />
               <Shimmer />
               <Shimmer />
@@ -147,6 +147,7 @@ export default function Body() {
         ))}
       </div> */}
       </div>
+      <Footer/>
     </>
   );
 }
