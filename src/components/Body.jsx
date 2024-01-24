@@ -17,6 +17,7 @@ export default function Body() {
   }, []);
 
   const fetchData = async () => {
+    //another api: https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6126255&lng=77.04108959999999&page_type=DESKTOP_WEB_LISTING
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
@@ -24,36 +25,9 @@ export default function Body() {
     console.log(jsonData);
     setListOfResturants(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
+        ?.restaurants //only cards[1] and cards[4] working
     );
   };
-  if (listOfResturants.length === 0) {
-    return (
-      <div className=" flex justify-center gap-10 items-center flex-wrap mt-40 lg:px-32 px-4">
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-        <Shimmer />
-      </div>
-    );
-  }
 
   function handleToggleFilter() {
     setisFilterted(!isFilterted);
@@ -70,73 +44,109 @@ export default function Body() {
   }
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center mt-10 lg:px-32 px-4 text-[#111111] z-[99999]">
+    <>
       <FoodCategoryCrousel />
-      <div className="px-16 flex flex-col justify-start gap-4 mt-10">
-        <h2 className="text-2xl font-semibold text-[#111111]">
-          Top restaurant chains in Bangalore
-        </h2>
-        <div className="flex justify-center gap-10 items-center flex-wrap">
-          {listOfResturants.map((resturant) => {
-            return (
-              <RecomendedResturant
-                resturant={resturant}
-                key={resturant.info.id}
-              />
-            );
-          })}
+      <div className="flex flex-col gap-4 justify-center items-center lg:px-32 px-4 text-[#111111] z-[99999]">
+        <div className="px-16 flex flex-col justify-start gap-4 mt-10">
+          <h2 className="text-2xl font-semibold text-[#111111]">
+            Top restaurant chains in Bangalore
+          </h2>
+          {/* <div className="flex justify-center gap-10 items-center flex-wrap"> */}
+            {listOfResturants.length === 0 ? (
+              <div className=" flex justify-center gap-10 items-center flex-wrap mt-10 ">
+                <Shimmer />
+                <Shimmer />
+                <Shimmer />
+                <Shimmer />
+              </div>
+            ) : (
+              <div className="flex justify-center  gap-10 items-center flex-wrap">
+                {listOfResturants.map((resturant) => (
+                  <RecomendedResturant
+                    resturant={resturant}
+                    key={resturant.info.id}
+                  />
+                ))}
+              </div>
+            )}
+          {/* </div> */}
         </div>
-      </div>
-      <div className="px-16 flex flex-col justify-start gap-4 mt-10">
-        <h2 className="text-2xl font-semibold text-[#111111]">
-          Restaurants with online food delivery in Bangalore
-        </h2>
-        <div className="my-2 py-4 px-4 w-full flex justify-between">
-          <button className="border rounded-2xl px-4 py-2 shadow-sm">
-            Sort By
-          </button>
-          <button
-            className="border rounded-2xl px-4 py-2 shadow-sm"
+        <div className="px-16 flex flex-col justify-start gap-4 mt-10">
+          <h2 className="text-2xl font-semibold text-[#111111]">
+            Restaurants with online food delivery in Bangalore
+          </h2>
+          <div className="my-2 py-4 px-4 w-full flex justify-between">
+            <button className="border rounded-2xl px-4 py-2 shadow-sm">
+              Sort By
+            </button>
+            <button
+              className="border rounded-2xl px-4 py-2 shadow-sm"
 
-            // onClick={handleTopDeliveryTime}
-          >
-            Fast Delivery
-          </button>
-          <button
-            className={`border rounded-2xl px-4 py-2 shadow-sm ${
-              isFilterted ? "bg-blue-500 text-white" : ""
-            }`}
-            onClick={handleTopResturants}
-          >
-            Ratings 4.0+
-          </button>
-          <button
-            className="border rounded-2xl px-4 py-2 shadow-sm"
-            // onClick={handlePureVeg}
-          >
-            Pure Veg
-          </button>
-          <button className="border rounded-2xl px-4 py-2 shadow-sm">
-            Rs. 300-Rs. 600
-          </button>
-          <button className="border rounded-2xl px-4 py-2 shadow-sm">
-            Less Than Rs. 300
-          </button>
+              // onClick={handleTopDeliveryTime}
+            >
+              Fast Delivery
+            </button>
+            <button
+              className={`border rounded-2xl px-4 py-2 shadow-sm ${
+                isFilterted ? "bg-blue-500 text-white" : ""
+              }`}
+              onClick={handleTopResturants}
+            >
+              Ratings 4.0+
+            </button>
+            <button
+              className="border rounded-2xl px-4 py-2 shadow-sm"
+              // onClick={handlePureVeg}
+            >
+              Pure Veg
+            </button>
+            <button className="border rounded-2xl px-4 py-2 shadow-sm">
+              Rs. 300-Rs. 600
+            </button>
+            <button className="border rounded-2xl px-4 py-2 shadow-sm">
+              Less Than Rs. 300
+            </button>
+          </div>
+          {listOfResturants.length === 0 ? (
+            <div className=" flex justify-center gap-10 items-center flex-wrap mt-40 lg:px-32 px-4">
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+              <Shimmer />
+            </div>
+          ) : (
+            <div className="flex justify-center  gap-10 items-center flex-wrap">
+              {listOfResturants &&
+                listOfResturants.map((resturant, index) => {
+                  return <ResturentCard resturant={resturant} key={index} />;
+                })}
+            </div>
+          )}
         </div>
 
-        <div className="flex justify-center  gap-10 items-center flex-wrap">
-          {listOfResturants &&
-            listOfResturants.map((resturant, index) => {
-              return <ResturentCard resturant={resturant} key={index} />;
-            })}
-        </div>
-      </div>
-
-      {/* <div className="flex gap-4 justify-center items-center flex-wrap">
+        {/* <div className="flex gap-4 justify-center items-center flex-wrap">
         {datas.map((product) => (
           <Card key={product.data.id} {...product.data} />
         ))}
       </div> */}
-    </div>
+      </div>
+    </>
   );
 }

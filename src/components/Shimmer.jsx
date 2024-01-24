@@ -10,14 +10,9 @@ export default function Shimmer() {
           <span className="absolute left-2 bottom-2 text-xl font-extrabold text-white bg-slate-400 shadow-lg b"></span>
         </div>{" "}
         <div className="flex flex-col justify-start w-full pt-4 px-2 text-zinc-800">
-          <div className="flex fle-col items-center gap-2">
-            <span className="w-full h-2 bg-slate-300 rounded-lg"></span>
-            <span className="w-full h-2 bg-slate-300 rounded-lg"></span>
-          </div>
-
           <div className="flex flex-col items-center gap-2">
-            <span className="w-full h-2 bg-slate-300 rounded-lg"></span>
-            <span className="w-full h-2 bg-slate-300 rounded-lg"></span>
+            <span className="w-full h-3 bg-slate-300 rounded-lg"></span>
+            <span className="w-full h-3 bg-slate-300 rounded-lg"></span>
           </div>
         </div>
       </div>
