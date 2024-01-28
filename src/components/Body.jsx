@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import RecomendedResturant from "./RecomendedResturant.jsx";
+// import RecomendedResturant from "./RecomendedResturant.jsx";
 import ResturentCard from "./ResturantCards.jsx";
 import { allRestaurants } from "../data/AllResturants.js";
 import FoodCategoryCrousel from "./FoodCategoryCrousel.jsx";
@@ -26,7 +26,7 @@ export default function Body() {
     console.log(jsonData);
     setListOfResturants(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants //only cards[1] and cards[4] working
+        ?.restaurants //only cards[1] and cards[4] working for resturant
     );
   };
 
@@ -135,7 +135,12 @@ export default function Body() {
             <div className="flex justify-center  gap-10 items-center flex-wrap">
               {listOfResturants &&
                 listOfResturants.map((resturant, index) => {
-                  return <ResturentCard resturant={resturant} key={index} />;
+                  return (
+                    <ResturentCard
+                      resturant={resturant}
+                      key={resturant?.info?.id}
+                    />
+                  );
                 })}
             </div>
           )}
@@ -147,7 +152,7 @@ export default function Body() {
         ))}
       </div> */}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
