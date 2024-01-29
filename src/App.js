@@ -1,20 +1,39 @@
-import Body from "./components/Body";
 import Header from "./components/Header";
+import Body from "./pages/Body";
+import Search from "./pages/Search";
+import Error from "./pages/Error";
+import Offers from "./pages/Offers";
+import Help from "./pages/Help";
+import Profile from "./pages/Profile";
+import Cart from "./pages/Cart";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SearchPage from "./pages/SearchPage";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter className="App">
-      {" "}
+    <div>
       <Header />
-      <Routes>
-        <Route path="/" element={<Body />} />
-        <Route path="/search" element={<SearchPage />} />
-      </Routes>
-    </BrowserRouter>
+      <div>
+        {" "}
+        <Outlet />
+      </div>
+    </div>
   );
 }
+export const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "/", element: <Body /> },
+      { path: "/search", element: <Search /> },
+      { path: "/offers", element: <Offers /> },
+      { path: "/help", element: <Help /> },
+      { path: "/user", element: <Profile /> },
+      { path: "/cart", element: <Cart /> },
+    ],
+    errorElement: <Error />,
+  },
+]);
 
 export default App;

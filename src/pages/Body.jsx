@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import RecomendedResturant from "./RecomendedResturant.jsx";
-import ResturentCard from "./ResturantCards.jsx";
+import ResturentCard from "../components/ResturantCards.jsx";
 import { allRestaurants } from "../data/AllResturants.js";
-import FoodCategoryCrousel from "./FoodCategoryCrousel.jsx";
-import Shimmer from "./Shimmer.jsx";
-import Footer from "./Footer.jsx";
+import FoodCategoryCrousel from "../components/FoodCategoryCrousel.jsx";
+import Shimmer from "../components/Shimmer.jsx";
+import Footer from "../components/Footer.jsx";
 
 export default function Body() {
   const [listOfResturants, setListOfResturants] = useState([]);

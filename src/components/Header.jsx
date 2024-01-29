@@ -74,7 +74,7 @@ export default function Header() {
           </li>
           <li>
             <Link
-              to="/profile"
+              to="/user"
               className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer"
             >
               <span className="text-xl">

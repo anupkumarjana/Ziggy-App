@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ResturentCard from "./ResturantCards.jsx";
-import ShimmerFullWidth from "./ShimmerFullWidth.jsx";
+import ResturentCard from "../components/ResturantCards.jsx";
+import ShimmerFullWidth from "../components/ShimmerFullWidth.jsx";
 
 export default function Search() {
   const [listOfResturants, setListOfResturants] = useState([]);
@@ -40,8 +40,8 @@ export default function Search() {
   };
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className="flex items-center gap-4 w-full justify-center mt-24">
+    <div className="flex flex-col gap-10 mt-44 lg:px-32 px-4">
+      <div className="flex items-center gap-4 w-full justify-center">
         <input
           type="text"
           placeholder="Find your favourite restaurant"
