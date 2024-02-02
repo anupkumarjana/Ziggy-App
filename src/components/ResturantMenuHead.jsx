@@ -5,10 +5,11 @@ import { FaStar } from "react-icons/fa";
 
 export default function ResturantMenuHead({ resData }) {
   return (
-    <div className="flex justify-between items-center pb-4 border-b">
+    <div
+      className="flex justify-between items-center pb-4 border-b ">
       <div>
-        <div className="flex flex-col gap-4">
-          <h2 className="text-lg font-semibold text-zinc-700">
+        <div className="flex flex-col gap-4 ">
+          <h2 className="text-xl font-semibold text-zinc-700">
             {resData.name}
           </h2>
           <div className="text-sm text-slate-500 font-light">
