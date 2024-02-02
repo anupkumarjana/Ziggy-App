@@ -4,7 +4,7 @@ import ResturantMenuBody from "../components/ResturantMenuBody";
 import { useParams } from "react-router-dom";
 import ShimmerMenu from "../components/ShimmerMenu";
 
-export default function ResturantMenu(data) {
+export default function ResturantMenu() {
   const [resData, setResData] = useState({});
   const [menuData, setmenuData] = useState([]);
 
@@ -12,6 +12,7 @@ export default function ResturantMenu(data) {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const fetchData = async () => {
