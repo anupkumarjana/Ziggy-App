@@ -6,7 +6,7 @@ import Offers from "./pages/Offers";
 import Help from "./pages/Help";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
-
+import ResturantMenu from "./pages/ResturantMenu";
 import { createBrowserRouter, Outlet } from "react-router-dom";
 
 function App() {
@@ -31,6 +31,7 @@ export const appRouter = createBrowserRouter([
       { path: "/help", element: <Help /> },
       { path: "/user", element: <Profile /> },
       { path: "/cart", element: <Cart /> },
+      { path: "/resturant/:restaurantId", element: <ResturantMenu /> },
     ],
     errorElement: <Error />,
   },

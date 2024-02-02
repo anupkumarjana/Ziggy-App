@@ -6,6 +6,7 @@ import { allRestaurants } from "../data/AllResturants.js";
 import FoodCategoryCrousel from "../components/FoodCategoryCrousel.jsx";
 import Shimmer from "../components/Shimmer.jsx";
 import Footer from "../components/Footer.jsx";
+import { Link } from "react-router-dom";
 
 export default function Body() {
   const [listOfResturants, setListOfResturants] = useState([]);
@@ -134,12 +135,14 @@ export default function Body() {
           ) : (
             <div className="flex justify-center  gap-10 items-center flex-wrap">
               {listOfResturants &&
-                listOfResturants.map((resturant, index) => {
+                listOfResturants.map((resturant) => {
                   return (
-                    <ResturentCard
-                      resturant={resturant}
-                      key={resturant?.info?.id}
-                    />
+                    <Link key={resturant?.info?.id} to={`resturant/${resturant?.info?.id}`}>
+                      <ResturentCard
+                        resturant={resturant}
+                        
+                      />
+                    </Link>
                   );
                 })}
             </div>
