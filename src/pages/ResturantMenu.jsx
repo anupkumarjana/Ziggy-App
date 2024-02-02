@@ -4,6 +4,7 @@ import ResturantMenuBody from "../components/ResturantMenuBody";
 import { useParams } from "react-router-dom";
 import ShimmerMenu from "../components/ShimmerMenu";
 
+
 export default function ResturantMenu() {
   const [resData, setResData] = useState({});
   const [menuData, setmenuData] = useState([]);
@@ -54,7 +55,7 @@ export default function ResturantMenu() {
   }
 
   return (
-    <div className="flex flex-col gap-4 lg:px-80 px-4 text-[#111111] z-[99999] mt-36">
+    <div className="flex flex-col gap-4 lg:px-80 px-4 text-[#111111] z-[99999] mt-36" >
       <ResturantMenuHead resData={resData} key={resData.id} />
       {menuData.map((data) => (
         <ResturantMenuBody data={data} key={data?.card?.info?.id} />

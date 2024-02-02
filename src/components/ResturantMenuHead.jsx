@@ -6,7 +6,9 @@ import { FaStar } from "react-icons/fa";
 export default function ResturantMenuHead({ resData }) {
   return (
     <div
-      className="flex justify-between items-center pb-4 border-b ">
+      className="flex justify-between items-center pb-4 border-b rounded-lg p-4 shadow-lg mb-10"
+     
+    >
       <div>
         <div className="flex flex-col gap-4 ">
           <h2 className="text-xl font-semibold text-zinc-700">
