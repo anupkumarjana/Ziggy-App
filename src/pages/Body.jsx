@@ -7,6 +7,7 @@ import FoodCategoryCrousel from "../components/FoodCategoryCrousel.jsx";
 import Shimmer from "../components/Shimmer.jsx";
 import Footer from "../components/Footer.jsx";
 import { Link } from "react-router-dom";
+import { restaurantApi } from "../constants.js";
 
 export default function Body() {
   const [listOfResturants, setListOfResturants] = useState([]);
@@ -20,9 +21,7 @@ export default function Body() {
 
   const fetchData = async () => {
     //another api: https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6126255&lng=77.04108959999999&page_type=DESKTOP_WEB_LISTING
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(restaurantApi);
     const jsonData = await data.json();
     console.log(jsonData);
     setListOfResturants(
@@ -137,11 +136,11 @@ export default function Body() {
               {listOfResturants &&
                 listOfResturants.map((resturant) => {
                   return (
-                    <Link key={resturant?.info?.id} to={`resturant/${resturant?.info?.id}`}>
-                      <ResturentCard
-                        resturant={resturant}
-                        
-                      />
+                    <Link
+                      key={resturant?.info?.id}
+                      to={`resturant/${resturant?.info?.id}`}
+                    >
+                      <ResturentCard resturant={resturant} />
                     </Link>
                   );
                 })}

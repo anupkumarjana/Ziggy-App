@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ResturentCard from "../components/ResturantCards.jsx";
 import ShimmerFullWidth from "../components/ShimmerFullWidth.jsx";
+import { Link } from "react-router-dom";
+import { restaurantApi } from "../constants.js";
 
 export default function Search() {
   const [listOfResturants, setListOfResturants] = useState([]);
@@ -10,14 +12,13 @@ export default function Search() {
 
   useEffect(() => {
     handleSearch();
-  }, []);
+    //eslint-disable-next-line 
+  }, [searchText]);
 
   const handleSearch = async () => {
     setLoading(true);
 
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.2668695&lng=75.70225669999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(restaurantApi);
     const jsonData = await data.json();
 
     const resData =
@@ -63,8 +64,13 @@ export default function Search() {
         {loading ? (
           <ShimmerFullWidth />
         ) : searched && listOfResturants.length > 0 ? (
-          listOfResturants.map((resturant, index) => (
-            <ResturentCard resturant={resturant} key={index} />
+          listOfResturants.map((resturant) => (
+            <Link
+              key={resturant?.info?.id}
+              to={`resturant/${resturant?.info?.id}`}
+            >
+              <ResturentCard resturant={resturant} />
+            </Link>
           ))
         ) : (
           <p className="text-slate-700">No results found.</p>

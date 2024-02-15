@@ -31,7 +31,11 @@ export const appRouter = createBrowserRouter([
       { path: "/help", element: <Help /> },
       { path: "/user", element: <Profile /> },
       { path: "/cart", element: <Cart /> },
-      { path: "/resturant/:restaurantId", element: <ResturantMenu /> },
+      {
+        path: "/resturant/:restaurantId",
+        element: <ResturantMenu />,
+      },
+      { path: "/search/resturant/:restaurantId", element: <ResturantMenu /> },
     ],
     errorElement: <Error />,
   },
