@@ -7,7 +7,8 @@ import FoodCategoryCrousel from "../components/FoodCategoryCrousel.jsx";
 import Shimmer from "../components/Shimmer.jsx";
 import Footer from "../components/Footer.jsx";
 import { Link } from "react-router-dom";
-import { restaurantApi } from "../constants.js";
+import { restaurantApi } from "../utils/constants.js";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 export default function Body() {
   const [listOfResturants, setListOfResturants] = useState([]);
@@ -42,6 +43,16 @@ export default function Body() {
     isFilterted
       ? setTopResturants(allRestaurants)
       : setTopResturants(filteredTopResturants);
+  }
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false) {
+    return (
+      <h1 className="mt-60">
+        Looks like you're offline! <br /> Please check your internet connection!
+      </h1>
+    );
   }
 
   return (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { menuApi } from "../constants";
+import { menuApi } from "./constants";
 
 const useReataurantMenuHead = (restaurantId) => {
   const [resData, setResData] = useState({});

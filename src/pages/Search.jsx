@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ResturentCard from "../components/ResturantCards.jsx";
 import ShimmerFullWidth from "../components/ShimmerFullWidth.jsx";
 import { Link } from "react-router-dom";
-import { restaurantApi } from "../constants.js";
+import { restaurantApi } from "../utils/constants.js";
 
 export default function Search() {
   const [listOfResturants, setListOfResturants] = useState([]);
@@ -12,8 +12,8 @@ export default function Search() {
 
   useEffect(() => {
     handleSearch();
-    //eslint-disable-next-line 
-  }, [searchText]);
+    //eslint-disable-next-line
+  }, []);
 
   const handleSearch = async () => {
     setLoading(true);

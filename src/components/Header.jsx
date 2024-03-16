@@ -9,6 +9,7 @@ import { RiAccountCircleLine } from "react-icons/ri";
 import { MdOutlineClose } from "react-icons/md";
 import { CiMenuBurger } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,6 +21,8 @@ export default function Header() {
   function handleMenuClose() {
     setMenuOpen(!menuOpen);
   }
+  const onlineStatus = useOnlineStatus();
+
   return (
     <header className="fixed top-0 z-[999999] flex justify-between items-center px-10 lg:px-32 py-8 lg:py-6 font-satoshi border-b w-full shadow-lg bg-white">
       <div className="flex gap-4 items-center">
@@ -39,6 +42,7 @@ export default function Header() {
 
       <nav className="lg:block hidden">
         <ul className="flex justify-between gap-10">
+          <li>Online Status:{onlineStatus ? "✅" : "🔴"} </li>
           <li>
             <Link
               to="/search"
