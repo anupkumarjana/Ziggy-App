@@ -1,35 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ResturantMenuHead from "../components/ResturantMenuHead";
 import ResturantMenuBody from "../components/ResturantMenuBody";
 import { useParams } from "react-router-dom";
 import ShimmerMenu from "../components/ShimmerMenu";
-import { menuApi } from "../constants";
+import useReataurantMenuHead from "../utils/useRestaurantMenuHead";
+import useReataurantMenu from "../utils/useReataurantMenu";
 
 export default function ResturantMenu() {
-  const [resData, setResData] = useState({});
-  const [menuData, setmenuData] = useState([]);
-
   const { restaurantId } = useParams();
 
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line
-  }, []);
-
-  const fetchData = async () => {
-    const data = await fetch(`${menuApi}${restaurantId}`);
-    const jsonData = await data.json();
-
-    const ResturantData = await jsonData.data?.cards[0]?.card?.card?.info;
-    const menuDataCards =
-      (await jsonData.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR
-        .cards[1].card?.card?.itemCards) ||
-      (await jsonData.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR
-        .cards[2].card?.card?.itemCards);
-    setResData(ResturantData);
-    setmenuData(menuDataCards || []);
-    console.log(menuDataCards);
-  };
+  const resData = useReataurantMenuHead(restaurantId);
+  const menuData = useReataurantMenu(restaurantId);
   if (!resData || menuData.length === 0) {
     return (
       <div className="flex flex-col gap-10 mt-36 lg:px-80 px-4">

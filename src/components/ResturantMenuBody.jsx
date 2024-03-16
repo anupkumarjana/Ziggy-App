@@ -16,7 +16,7 @@ export default function ResturantMenuBody({ data }) {
             {data?.card?.info?.name}
           </h3>
           <h3 className="text-xs text-zinc-700 pb-4">
-            ₹ {data?.card?.info?.price / 100}
+            ₹ {parseInt(data?.card?.info?.price) / 100}
           </h3>{" "}
           <h3 className="text-wrap max-w-[30rem] text-xs text-zinc-500 font-light">
             {data?.card?.info?.description}
