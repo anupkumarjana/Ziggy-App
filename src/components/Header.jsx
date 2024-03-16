@@ -89,6 +89,17 @@ export default function Header() {
           </li>
           <li>
             <Link
+              to="/grocery"
+              className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer"
+            >
+              <span className="text-xl">
+                <RiAccountCircleLine />
+              </span>
+              <span>Grocery</span>
+            </Link>
+          </li>
+          <li>
+            <Link
               to="/cart"
               className="flex gap-2 items-center hover:text-red-500 font-medium text-[1rem] text-slate-700 cursor-pointer"
             >
