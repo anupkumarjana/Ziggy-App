@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import RecomendedResturant from "./RecomendedResturant.jsx";
-import ResturentCard from "../components/ResturantCards.jsx";
-import { allRestaurants } from "../data/AllResturants.js";
+import ResturentCard, {
+  WithPromotedRestaurantCard,
+} from "../components/ResturantCards.jsx";
+// import { allRestaurants } from "../data/AllResturants.js";
 import FoodCategoryCrousel from "../components/FoodCategoryCrousel.jsx";
 import Shimmer from "../components/Shimmer.jsx";
 import Footer from "../components/Footer.jsx";
@@ -15,6 +17,8 @@ export default function Body() {
 
   const [topResturants, setTopResturants] = useState(listOfResturants);
   const [isFilterted, setisFilterted] = useState(false);
+
+  const RestauranrCardsPromoted = WithPromotedRestaurantCard(ResturentCard);
 
   useEffect(() => {
     fetchData();
@@ -46,6 +50,8 @@ export default function Body() {
   }
 
   const onlineStatus = useOnlineStatus();
+
+  console.log(listOfResturants);
 
   if (onlineStatus === false) {
     return (
@@ -151,7 +157,11 @@ export default function Body() {
                       key={resturant?.info?.id}
                       to={`resturant/${resturant?.info?.id}`}
                     >
-                      <ResturentCard resturant={resturant} />
+                      {resturant.info.avgRating > 4 ? (
+                        <RestauranrCardsPromoted resturant={resturant} />
+                      ) : (
+                        <ResturentCard resturant={resturant} />
+                      )}
                     </Link>
                   );
                 })}
