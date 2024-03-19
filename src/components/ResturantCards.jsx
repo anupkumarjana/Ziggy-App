@@ -51,3 +51,16 @@ export default function ResturentCard({ resturant }) {
     </>
   );
 }
+
+export const WithPromotedRestaurantCard = (ResturentCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="absolute bg-black text-white z-[999998] p-1 text-xs">
+          Top rated
+        </label>
+        <ResturentCard {...props} />
+      </div>
+    );
+  };
+};
