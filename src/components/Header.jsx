@@ -10,6 +10,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { CiMenuBurger } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useSelector } from "react-redux";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,6 +23,8 @@ export default function Header() {
     setMenuOpen(!menuOpen);
   }
   const onlineStatus = useOnlineStatus();
+
+  const cartItems = useSelector((store) => store.cart.items);
 
   return (
     <header className="fixed top-0 z-[999999] flex justify-between items-center px-10 lg:px-32 py-8 lg:py-6 font-satoshi border-b w-full shadow-lg bg-white">
@@ -106,7 +109,7 @@ export default function Header() {
               <span className="text-xl">
                 <FaShoppingCart />
               </span>
-              <span>Cart</span>
+              <span>Cart</span> <span>{cartItems.length}</span>
             </Link>
           </li>
         </ul>
