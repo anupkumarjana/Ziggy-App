@@ -1,8 +1,17 @@
 import React from "react";
 import veg from "../assets/veg.png";
 import nonveg from "../assets/nonveg.png";
+import { useDispatch } from "react-redux";
+import { addItem } from "../slices/cartSlice";
 
 export default function ResturantMenuBody({ data }) {
+  const dispatch = useDispatch();
+
+  const handleAddButtonClick = () => {
+    dispatch(addItem(data));
+    // console.log(data);
+  };
+
   return (
     <>
       <div className="flex justify-between items-start cursor-pointer pb-6 border-b-2">
@@ -30,7 +39,10 @@ export default function ResturantMenuBody({ data }) {
             src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/${data?.card?.info?.imageId}`}
             alt=""
           />
-          <button className=" absolute left-6 bottom-[-10px] py-1 px-4 border rounded text-green-700 bg-white text-xs font-semibold shadow-lg">
+          <button
+            className=" absolute left-6 bottom-[-10px] py-1 px-4 border rounded text-green-700 bg-white text-xs font-semibold shadow-lg"
+            onClick={handleAddButtonClick}
+          >
             ADD
           </button>
         </div>

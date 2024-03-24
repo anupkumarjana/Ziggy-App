@@ -1,4 +1,4 @@
-import React, {lazy, Suspense} from "react";
+import React, { lazy, Suspense } from "react";
 import Header from "./components/Header";
 import Body from "./pages/Body";
 import Search from "./pages/Search";
@@ -9,19 +9,22 @@ import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import ResturantMenu from "./pages/ResturantMenu";
 import { createBrowserRouter, Outlet } from "react-router-dom";
+import { Provider } from "react-redux";
+import { appStore } from "./utils/appStore";
 
-
-const Grocery= lazy(()=>import("./components/Grocery"))
+const Grocery = lazy(() => import("./components/Grocery"));
 
 function App() {
   return (
-    <div>
-      <Header />
+    <Provider store={appStore}>
       <div>
-        {" "}
-        <Outlet />
+        <Header />
+        <div>
+          {" "}
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 }
 export const appRouter = createBrowserRouter([
@@ -35,7 +38,14 @@ export const appRouter = createBrowserRouter([
       { path: "/help", element: <Help /> },
       { path: "/user", element: <Profile /> },
       { path: "/cart", element: <Cart /> },
-      {path:"/grocery", element: <Suspense><Grocery/></Suspense>},
+      {
+        path: "/grocery",
+        element: (
+          <Suspense>
+            <Grocery />
+          </Suspense>
+        ),
+      },
       {
         path: "/resturant/:restaurantId",
         element: <ResturantMenu />,
