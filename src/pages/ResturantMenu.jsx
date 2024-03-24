@@ -8,25 +8,20 @@ import useReataurantMenuCategory from "../utils/useRestauranrMenuCategory";
 import { FaAngleDown } from "react-icons/fa6";
 
 export default function ResturantMenu() {
-  const [expanded, setExpanded] = useState(false);
   const { restaurantId } = useParams();
 
   const resData = useReataurantMenuHead(restaurantId);
   const restauranrMenuCategory = useReataurantMenuCategory(restaurantId);
 
-  function handleClick() {
-    setExpanded(!expanded);
-  }
+  const [expandedMenu, setExpandedMenu] = useState(null);
+
+  const handleCategoryClick = (categoryTitle) => {
+    setExpandedMenu(expandedMenu === categoryTitle ? null : categoryTitle);
+  };
 
   if (!resData || restauranrMenuCategory.length === 0) {
     return (
       <div className="flex flex-col gap-10 mt-36 lg:px-80 px-4">
-        <ShimmerMenu />
-        <ShimmerMenu />
-        <ShimmerMenu />
-        <ShimmerMenu />
-        <ShimmerMenu />
-        <ShimmerMenu />
         <ShimmerMenu />
         <ShimmerMenu />
         <ShimmerMenu />
@@ -46,12 +41,11 @@ export default function ResturantMenu() {
       <div className="flex flex-col gap-2">
         {restauranrMenuCategory.map((menuCategory) => (
           <div key={menuCategory.card.card.title} className={`cursor-pointer`}>
-            {console.log(menuCategory.card.card.title)}
             <div
               className="flex justify-between py-2 shadow-sm"
-              onClick={handleClick}
+              onClick={() => handleCategoryClick(menuCategory.card.card.title)}
             >
-              <span id="menuCetgory">
+              <span>
                 {menuCategory.card.card.title} (
                 {menuCategory.card.card.itemCards.length})
               </span>
@@ -59,18 +53,15 @@ export default function ResturantMenu() {
                 <FaAngleDown />
               </span>
             </div>
-            <div className={`cursor-pointer`}>
-              {menuCategory.card.card.itemCards.map((menuCard) => (
-                <div className="mt-4">
-                  {expanded && (
-                    <ResturantMenuBody
-                      data={menuCard}
-                      key={menuCard?.card?.info?.id}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
+            {expandedMenu === menuCategory.card.card.title && (
+              <div className={`cursor-pointer`}>
+                {menuCategory.card.card.itemCards.map((menuCard) => (
+                  <div className="mt-4" key={menuCard?.card?.info?.id}>
+                    <ResturantMenuBody data={menuCard} />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
